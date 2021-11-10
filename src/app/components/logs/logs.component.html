@@ -1,11 +1,17 @@
-<ul class="list-group" *ngIf="logs.length > 0">
-    <li *ngFor="let log of logs" class="list-group-item d-flex flex-row justify-content-between">
-        <a href="">{{ log.text }}</a>
+<ul class="list-group" *ngIf="loaded && logs.length > 0">
+    <li *ngFor="let log of logs" class="list-group-item d-flex flex-row justify-content-between"
+        [class.list-group-item-secondary]="selectedLog === log">
+        <a (click)="onSelect(log)" href="#">{{ log.text }}</a>
         <span class="log-date text-secondary">{{ log.date | date: 'short' }}</span>
-        <i class="fa fa-close"></i>
+        <i (click)="onDelete(log)" *ngIf="!(selectedLog === log)" class="fa fa-close"></i>
+        <i *ngIf="selectedLog === log" class="fa fa-refresh"></i>
     </li>
 </ul>
 
-<div class="card card-body text-center text-secondary" *ngIf="logs.length == 0">
+<div class="card card-body text-center text-secondary" *ngIf="loaded && logs.length == 0">
     No logs to show
+</div>
+
+<div class="card card-body text-center text-secondary" *ngIf="!loaded">
+    Loading....
 </div>
