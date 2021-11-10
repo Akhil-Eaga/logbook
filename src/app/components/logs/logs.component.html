@@ -1,0 +1,11 @@
+<ul class="list-group" *ngIf="logs.length > 0">
+    <li *ngFor="let log of logs" class="list-group-item d-flex flex-row justify-content-between">
+        <a href="">{{ log.text }}</a>
+        <span class="log-date text-secondary">{{ log.date | date: 'short' }}</span>
+        <i class="fa fa-close"></i>
+    </li>
+</ul>
+
+<div class="card card-body text-center text-secondary" *ngIf="logs.length == 0">
+    No logs to show
+</div>
