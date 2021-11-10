@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { LogService } from 'src/app/services/log.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class LogFormComponent implements OnInit {
   date: any = '';
   isNew: boolean = true;
 
-  constructor(private logService: LogService) { }
+  constructor(private logService: LogService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.logService.selectedLog$.subscribe(log => {
@@ -32,6 +33,7 @@ export class LogFormComponent implements OnInit {
       }
       // add the log
       this.logService.addLog(newLog);
+      this.toastr.success("Log added");
     } else {
       const updatedLog = {
         id: this.id,
@@ -40,6 +42,7 @@ export class LogFormComponent implements OnInit {
       }
       // update the log
       this.logService.updateLog(updatedLog);
+      this.toastr.info("Log updated");
     }
 
 

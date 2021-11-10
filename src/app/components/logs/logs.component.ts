@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject } from 'rxjs';
 import { LogService } from 'src/app/services/log.service';
 import { Log } from '../../models/log';
@@ -14,7 +15,7 @@ export class LogsComponent implements OnInit {
   selectedLog: Log;
   loaded: boolean = false;
 
-  constructor(private logService: LogService) { }
+  constructor(private logService: LogService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.logService.clearState$.subscribe(value => {
@@ -37,6 +38,7 @@ export class LogsComponent implements OnInit {
   onDelete(log: Log) {
     if (confirm("Are you sure you want to delete this log?")) {
       this.logService.deleteLog(log);
+      this.toastr.error("Log deleted");
     }
   }
 
