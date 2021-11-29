@@ -17,4 +17,4 @@ The live version of the application can be found at
 
 [https://akhil-eaga.github.io/logbook/](https://akhil-eaga.github.io/logbook/)
 
----
+----
